@@ -304,7 +304,10 @@ function frame(now) {
       if (isLast || tt < acc + dur + .6) {
         let k = Math.floor((tt - acc) * CPS), a = 1;
         if (!isLast) { const rem = acc + dur + .6 - tt; if (rem < .6) a = rem / .6; }
-        const y0 = Math.floor(rows * .78);
+        const mobile = W < 500;
+        const y0 = mobile
+          ? Math.max(0, Math.floor((rows - pg[i].length) / 2))
+          : Math.floor(rows * .78);
         pg[i].forEach((ln, j) => {
           const seg = ln.slice(0, Math.max(0, k)); k -= ln.length + 1;
           const x0 = Math.round((cols - ln.length) / 2);
